@@ -1,7 +1,22 @@
+  // --reporter tap --reporter-option tapVersion=13
+
+const assert = require('assert');
+
+//for using async await you can use chai as promise. else you can use done() in 'it' function args.
+const chaiAsPromised= require("chai-as-promised");
+chai.use(chaiAsPromised);
 
 // use to club all the test suits.
 // by default mocha is bdd. Use g docs to refer bdd / tdd / acceptance test
-describe("test suite started",()=>{
+describe("test suite started",function(){
+    global.app = "global app variable;";
+
+    // sets the global timeout for every tests and overall test
+    this.timeout(5000);
+
+    // the below console will be called first since it consoles before starting of the test so fixture wont be run firsts.
+    console.log(process.env.NODE_ENV + " -> process.env.NODE_ENV")
+
     // before("run the before hook",()=>{
     //     console.log("beofore hook called top level but not root level. \n");
     // })
@@ -18,24 +33,31 @@ describe("test suite started",()=>{
     // })
 
     // use to test a scenario/function
-    context("context 1 called",()=>{
+    context("context 1 called",function(){
+
+
         /**
          * beforeEach once defined is then set for every context/describe and its child if any
          * So every context can have its own hooks or it will inherit from parents.
          */
-         beforeEach("run the beforeEach hook for context 1",()=>{
-                console.log("beforeEach hook called 1 \n");
-            })
+         beforeEach("run the beforeEach hook for context 1",function(){
+            // this timeout doesn't set timeout for tests. Sets Only for this hook
+            this.timeout(1000)
+            console.log("beforeEach hook called 1 \n");
+        })
 
-            
+
         /* to test each tests.
             you can use done callback received  as args and pass error to it. eg done(err) or done() 
             also avoid using arrow function since it losts the reference to mocha Context
         */
-        it("test",function(){
-            this.timeout(200)
-            this.variable= "token"
-            console.log("it 1 called");
+        it("test",function(done){
+            this.timeout(700)
+            setTimeout(function(){
+                assert.strictEqual(1, 2)
+                done()
+            },500)
+           console.log("it 1 called");
             // done("failll")
         })
 
@@ -63,7 +85,7 @@ describe("test suite started",()=>{
         )
         it("test",function(){
 
-            console.log(this.timeout(), this.variable)
+            console.log(this.timeout())
             console.log("it 1-2 called");
         })
     })
