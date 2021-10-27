@@ -1,6 +1,7 @@
   // --reporter tap --reporter-option tapVersion=13
 
 const assert = require('assert');
+const chai = require("chai")
 
 //for using async await you can use chai as promise. else you can use done() in 'it' function args.
 const chaiAsPromised= require("chai-as-promised");

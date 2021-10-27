@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=development ./node_modules/.bin/mocha  --inline-diffs    --reporter list --require ./fixtures.js  --require ./fixturesTeardown.js --require ./testHooks.js  './**/*.spec.js' "
+    "test": "cross-env NODE_ENV=development ./node_modules/.bin/mocha  --inline-diffs    --reporter list --require ./fixtures.js  --require ./fixturesTeardown.js --require ./rootTestHooks.js  './**/*.spec.js' "
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^7.0.3",
-    "mocha": "^9.1.3"
+    "mocha": "^9.1.3",
+    "sinon": "^11.1.2"
   }
 }

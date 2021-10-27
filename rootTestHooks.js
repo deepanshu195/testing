@@ -8,7 +8,11 @@ exports.mochaHooks  = {
           done();
         // do something before every test,
         // then run the next hook in this array
-      }
-
-    ]
+      },
+    ],
+    afterEach:function() {
+      // Restore the default sandbox here
+      // const sinon = require("sinon") 
+      // sinon.restore();
+    },
   };
